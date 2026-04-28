@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
+        /* ========== ESTILOS COMPLETOS (igual que antes) ========== */
         :root {
             --bg-primary: #FDFBF7;
             --bg-secondary: #F5F1E8;
@@ -106,7 +107,6 @@
             --border-color: #2E4F3E;
         }
         
-        /* MEJORAS DE CONTRASTE PARA INSIGNIAS EN MODO OSCURO */
         [data-theme="dark"] .book-status.reading {
             background: rgba(245, 158, 11, 0.2);
             color: #FBBF24;
@@ -190,7 +190,6 @@
             transform: translateX(-320px);
         }
         
-        /* RESPONSIVE: en móvil la sidebar ocupa toda la pantalla */
         @media (max-width: 768px) {
             .sidebar {
                 width: 85%;
@@ -787,7 +786,6 @@
             border-color: #DC2626;
         }
         
-        /* ESTADÍSTICAS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -924,7 +922,6 @@
             font-family: var(--font-mono);
         }
         
-        /* READER STYLES */
         .reader-container {
             display: flex;
             flex-direction: column;
@@ -1168,7 +1165,6 @@
             transform: scale(1.2);
         }
         
-        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -1285,7 +1281,6 @@
             gap: var(--spacing-xs);
         }
         
-        /* TOAST */
         .toast-container {
             position: fixed;
             bottom: var(--spacing-lg);
@@ -1339,7 +1334,6 @@
             color: var(--text-primary);
         }
         
-        /* EMPTY STATE */
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -1370,68 +1364,6 @@
         .empty-description {
             color: var(--text-secondary);
             margin-bottom: var(--spacing-lg);
-        }
-        
-        /* LOADING */
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border-color);
-            border-top-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* SETTINGS */
-        .settings-section {
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .settings-section-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-        
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
-        }
-        
-        .setting-item {
-            background: var(--bg-secondary);
-            padding: var(--spacing-md);
-            border-radius: var(--radius-md);
-        }
-        
-        .setting-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-xs);
-            font-weight: 600;
-            display: block;
-        }
-        
-        .voice-select {
-            width: 100%;
-            padding: var(--spacing-sm);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            background: var(--bg-card);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
         }
         
         @media (max-width: 480px) {
@@ -1470,378 +1402,131 @@
     <input type="file" id="pdfInput" accept=".pdf" style="display: none;">
     
     <div class="app-container">
-        <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <div class="logo-icon">
-                        <i data-lucide="book-open" width="32" height="32"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>ReadFlow</h1>
-                        <p>Pro v3.1</p>
-                    </div>
+                    <div class="logo-icon"><i data-lucide="book-open" width="32" height="32"></i></div>
+                    <div class="logo-text"><h1>ReadFlow</h1><p>Pro v3.1</p></div>
                 </div>
             </div>
-            
             <nav class="sidebar-nav">
                 <div class="nav-section">
                     <div class="nav-section-title">Principal</div>
-                    <div class="nav-item active" data-view="library">
-                        <i data-lucide="library" width="20" height="20"></i>
-                        <span>Biblioteca</span>
-                        <span class="nav-badge" id="booksCount">0</span>
-                    </div>
-                    <div class="nav-item" data-view="stats">
-                        <i data-lucide="trending-up" width="20" height="20"></i>
-                        <span>Estadísticas</span>
-                    </div>
-                    <div class="nav-item" id="bookmarksBtn">
-                        <i data-lucide="bookmark" width="20" height="20"></i>
-                        <span>Marcadores</span>
-                        <span class="nav-badge" id="bookmarksCount">0</span>
-                    </div>
+                    <div class="nav-item active" data-view="library"><i data-lucide="library" width="20" height="20"></i><span>Biblioteca</span><span class="nav-badge" id="booksCount">0</span></div>
+                    <div class="nav-item" data-view="stats"><i data-lucide="trending-up" width="20" height="20"></i><span>Estadísticas</span></div>
+                    <div class="nav-item" id="bookmarksBtn"><i data-lucide="bookmark" width="20" height="20"></i><span>Marcadores</span><span class="nav-badge" id="bookmarksCount">0</span></div>
                 </div>
-                
-                <div class="nav-section">
-                    <div class="nav-section-title">Configuración</div>
-                    <div class="nav-item" id="settingsBtn">
-                        <i data-lucide="settings" width="20" height="20"></i>
-                        <span>Configuración</span>
-                    </div>
-                </div>
+                <div class="nav-section"><div class="nav-section-title">Configuración</div><div class="nav-item" id="settingsBtn"><i data-lucide="settings" width="20" height="20"></i><span>Configuración</span></div></div>
             </nav>
-            
-            <div class="sidebar-footer">
-                <div class="theme-selector">
-                    <button class="theme-btn active" data-theme="light" title="Claro"></button>
-                    <button class="theme-btn" data-theme="dark" title="Oscuro"></button>
-                    <button class="theme-btn" data-theme="sepia" title="Sepia"></button>
-                    <button class="theme-btn" data-theme="midnight" title="Medianoche"></button>
-                    <button class="theme-btn" data-theme="forest" title="Bosque"></button>
-                </div>
-            </div>
+            <div class="sidebar-footer"><div class="theme-selector"><button class="theme-btn active" data-theme="light" title="Claro"></button><button class="theme-btn" data-theme="dark" title="Oscuro"></button><button class="theme-btn" data-theme="sepia" title="Sepia"></button><button class="theme-btn" data-theme="midnight" title="Medianoche"></button><button class="theme-btn" data-theme="forest" title="Bosque"></button></div></div>
         </aside>
         
-        <!-- MAIN CONTENT -->
         <main class="main-content" id="mainContent">
-            <!-- TOPBAR -->
             <div class="topbar">
-                <div class="topbar-left">
-                    <button class="menu-toggle" id="menuToggle">
-                        <i data-lucide="menu" width="24" height="24"></i>
-                    </button>
-                    <div class="search-bar">
-                        <i data-lucide="search" width="20" height="20" class="search-icon"></i>
-                        <input type="text" class="search-input" placeholder="Buscar en tus libros..." id="searchInput">
-                    </div>
-                </div>
-                <div class="topbar-right">
-                    <button class="btn-primary" id="uploadBtn">
-                        <i data-lucide="upload" width="20" height="20"></i>
-                        <span>Subir PDF</span>
-                    </button>
-                </div>
+                <div class="topbar-left"><button class="menu-toggle" id="menuToggle"><i data-lucide="menu" width="24" height="24"></i></button><div class="search-bar"><i data-lucide="search" width="20" height="20" class="search-icon"></i><input type="text" class="search-input" placeholder="Buscar en tus libros..." id="searchInput"></div></div>
+                <div class="topbar-right"><button class="btn-primary" id="uploadBtn"><i data-lucide="upload" width="20" height="20"></i><span>Subir PDF</span></button></div>
             </div>
             
-            <!-- LIBRARY VIEW -->
             <div class="view active" id="libraryView">
                 <div class="view-container">
-                    <div class="view-header">
-                        <h2 class="view-title">Mi Biblioteca</h2>
-                        <p class="view-subtitle">Gestiona tu colección personal de libros 📚</p>
-                    </div>
-                    
-                    <div class="library-controls">
-                        <select class="filter-dropdown" id="filterStatus">
-                            <option value="all">📚 Todos los libros</option>
-                            <option value="reading">📖 Leyendo</option>
-                            <option value="completed">✅ Completados</option>
-                            <option value="unread">🆕 Sin empezar</option>
-                        </select>
-                    </div>
-                    
+                    <div class="view-header"><h2 class="view-title">Mi Biblioteca</h2><p class="view-subtitle">Gestiona tu colección personal de libros 📚</p></div>
+                    <div class="library-controls"><select class="filter-dropdown" id="filterStatus"><option value="all">📚 Todos los libros</option><option value="reading">📖 Leyendo</option><option value="completed">✅ Completados</option><option value="unread">🆕 Sin empezar</option></select></div>
                     <div class="books-grid" id="booksGrid"></div>
-                    
-                    <div class="empty-state" id="emptyState" style="display: none;">
-                        <div class="empty-icon">📚</div>
-                        <h3 class="empty-title">Tu biblioteca está vacía</h3>
-                        <p class="empty-description">Comienza subiendo tu primer PDF</p>
-                        <button class="btn-primary" onclick="document.getElementById('uploadBtn').click()">
-                            <i data-lucide="upload" width="20" height="20"></i>
-                            <span>Subir mi primer libro</span>
-                        </button>
-                    </div>
+                    <div class="empty-state" id="emptyState" style="display: none;"><div class="empty-icon">📚</div><h3 class="empty-title">Tu biblioteca está vacía</h3><p class="empty-description">Comienza subiendo tu primer PDF</p><button class="btn-primary" onclick="document.getElementById('uploadBtn').click()"><i data-lucide="upload" width="20" height="20"></i><span>Subir mi primer libro</span></button></div>
                 </div>
             </div>
             
-            <!-- STATS VIEW -->
             <div class="view" id="statsView">
                 <div class="view-container">
-                    <div class="view-header">
-                        <h2 class="view-title">Estadísticas</h2>
-                        <p class="view-subtitle">Tu progreso y logros de lectura</p>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statTotal">0</div>
-                                    <div class="stat-label">Total de Libros</div>
-                                </div>
-                                <div class="stat-icon blue">
-                                    <i data-lucide="library" width="24" height="24"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statReading">0</div>
-                                    <div class="stat-label">Leyendo Ahora</div>
-                                </div>
-                                <div class="stat-icon orange">
-                                    <i data-lucide="book-open" width="24" height="24"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statCompleted">0</div>
-                                    <div class="stat-label">Completados</div>
-                                </div>
-                                <div class="stat-icon green">
-                                    <i data-lucide="check-circle" width="24" height="24"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statProgress">0%</div>
-                                    <div class="stat-label">Progreso Promedio</div>
-                                </div>
-                                <div class="stat-icon purple">
-                                    <i data-lucide="trending-up" width="24" height="24"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-section">
-                        <h3 class="section-title">Actividad Reciente</h3>
-                        <div class="activity-list" id="activityList"></div>
-                    </div>
+                    <div class="view-header"><h2 class="view-title">Estadísticas</h2><p class="view-subtitle">Tu progreso y logros de lectura</p></div>
+                    <div class="stats-grid"><div class="stat-card"><div class="stat-header"><div><div class="stat-value" id="statTotal">0</div><div class="stat-label">Total de Libros</div></div><div class="stat-icon blue"><i data-lucide="library" width="24" height="24"></i></div></div></div><div class="stat-card"><div class="stat-header"><div><div class="stat-value" id="statReading">0</div><div class="stat-label">Leyendo Ahora</div></div><div class="stat-icon orange"><i data-lucide="book-open" width="24" height="24"></i></div></div></div><div class="stat-card"><div class="stat-header"><div><div class="stat-value" id="statCompleted">0</div><div class="stat-label">Completados</div></div><div class="stat-icon green"><i data-lucide="check-circle" width="24" height="24"></i></div></div></div><div class="stat-card"><div class="stat-header"><div><div class="stat-value" id="statProgress">0%</div><div class="stat-label">Progreso Promedio</div></div><div class="stat-icon purple"><i data-lucide="trending-up" width="24" height="24"></i></div></div></div></div>
+                    <div class="activity-section"><h3 class="section-title">Actividad Reciente</h3><div class="activity-list" id="activityList"></div></div>
                 </div>
             </div>
             
-            <!-- READER VIEW -->
             <div class="view" id="readerView">
                 <div class="reader-container">
-                    <div class="reader-topbar">
-                        <div class="reader-info">
-                            <button class="icon-btn" id="backToLibrary" title="Volver">
-                                <i data-lucide="arrow-left" width="20" height="20"></i>
-                            </button>
-                            <div>
-                                <div class="reader-title" id="readerTitle">Sin título</div>
-                                <div class="reader-page-info">
-                                    Página <span id="currentPageDisplay">1</span> de <span id="totalPagesDisplay">---</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="reader-actions">
-                            <button class="icon-btn" id="addBookmarkBtn" title="Agregar marcador">
-                                <i data-lucide="bookmark" width="20" height="20"></i>
-                            </button>
-                            <button class="icon-btn" id="focusModeBtn" title="Modo concentración (ocultar controles)">
-                                <i data-lucide="maximize" width="20" height="20"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="reader-content" id="readerContent">
-                        <canvas id="pdfCanvas" class="pdf-viewer"></canvas>
-                    </div>
-                    
+                    <div class="reader-topbar"><div class="reader-info"><button class="icon-btn" id="backToLibrary" title="Volver"><i data-lucide="arrow-left" width="20" height="20"></i></button><div><div class="reader-title" id="readerTitle">Sin título</div><div class="reader-page-info">Página <span id="currentPageDisplay">1</span> de <span id="totalPagesDisplay">---</span></div></div></div><div class="reader-actions"><button class="icon-btn" id="addBookmarkBtn" title="Agregar marcador"><i data-lucide="bookmark" width="20" height="20"></i></button><button class="icon-btn" id="focusModeBtn" title="Modo concentración (ocultar controles)"><i data-lucide="maximize" width="20" height="20"></i></button></div></div>
+                    <div class="reader-content" id="readerContent"><canvas id="pdfCanvas" class="pdf-viewer"></canvas></div>
                     <div class="reader-controls" id="readerControls">
-                        <div class="navigation-controls">
-                            <div class="nav-btn-group">
-                                <button class="nav-btn" id="prevPageBtn">
-                                    <i data-lucide="chevron-left" width="20" height="20"></i>
-                                    Anterior
-                                </button>
-                            </div>
-                            
-                            <div class="page-input-group">
-                                <input type="number" class="page-input" id="pageInput" min="1" value="1">
-                                <span class="reader-page-info">de <span id="totalPages2">---</span></span>
-                            </div>
-                            
-                            <div class="zoom-controls">
-                                <button class="icon-btn" id="zoomOutBtn" title="Zoom -">
-                                    <i data-lucide="zoom-out" width="20" height="20"></i>
-                                </button>
-                                <span class="zoom-value" id="zoomValue">120%</span>
-                                <button class="icon-btn" id="zoomInBtn" title="Zoom +">
-                                    <i data-lucide="zoom-in" width="20" height="20"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="nav-btn-group">
-                                <button class="nav-btn" id="nextPageBtn">
-                                    Siguiente
-                                    <i data-lucide="chevron-right" width="20" height="20"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="tts-controls">
-                            <div class="tts-buttons">
-                                <button class="btn-primary" id="ttsPlayBtn">
-                                    <i data-lucide="play" width="20" height="20" id="ttsIcon"></i>
-                                    <span id="ttsText">Leer en Voz Alta</span>
-                                </button>
-                                <select class="filter-dropdown" id="voiceSelect">
-                                    <option value="female">🗣️ Voz Femenina</option>
-                                    <option value="male">🗣️ Voz Masculina</option>
-                                </select>
-                                <button id="autoNextToggle" class="auto-next-toggle" title="Pasar página automáticamente al terminar">
-                                    <i data-lucide="skip-forward" width="18" height="18"></i>
-                                    <span>Auto-página</span>
-                                    <span id="autoNextStatus">OFF</span>
-                                </button>
-                            </div>
-                            
-                            <div class="tts-sliders">
-                                <div class="slider-group">
-                                    <label class="slider-label">
-                                        <span>Velocidad</span>
-                                        <span class="slider-value" id="speedValue">1.0x</span>
-                                    </label>
-                                    <input type="range" class="slider" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-                                </div>
-                                
-                                <div class="slider-group">
-                                    <label class="slider-label">
-                                        <span>Volumen</span>
-                                        <span class="slider-value" id="volumeValue">100%</span>
-                                    </label>
-                                    <input type="range" class="slider" id="volumeSlider" min="0" max="1" step="0.1" value="1">
-                                </div>
-                                
-                                <div class="slider-group">
-                                    <label class="slider-label">
-                                        <span>Brillo</span>
-                                        <span class="slider-value" id="brightnessValue">100%</span>
-                                    </label>
-                                    <input type="range" class="slider" id="brightnessSlider" min="30" max="200" step="10" value="100">
-                                </div>
-                            </div>
-                        </div>
+                        <div class="navigation-controls"><div class="nav-btn-group"><button class="nav-btn" id="prevPageBtn"><i data-lucide="chevron-left" width="20" height="20"></i> Anterior</button></div><div class="page-input-group"><input type="number" class="page-input" id="pageInput" min="1" value="1"><span class="reader-page-info">de <span id="totalPages2">---</span></span></div><div class="zoom-controls"><button class="icon-btn" id="zoomOutBtn" title="Zoom -"><i data-lucide="zoom-out" width="20" height="20"></i></button><span class="zoom-value" id="zoomValue">120%</span><button class="icon-btn" id="zoomInBtn" title="Zoom +"><i data-lucide="zoom-in" width="20" height="20"></i></button></div><div class="nav-btn-group"><button class="nav-btn" id="nextPageBtn">Siguiente <i data-lucide="chevron-right" width="20" height="20"></i></button></div></div>
+                        <div class="tts-controls"><div class="tts-buttons"><button class="btn-primary" id="ttsPlayBtn"><i data-lucide="play" width="20" height="20" id="ttsIcon"></i><span id="ttsText">Leer en Voz Alta</span></button><select class="filter-dropdown" id="voiceSelect"><option value="female">🗣️ Voz Femenina</option><option value="male">🗣️ Voz Masculina</option></select><button id="autoNextToggle" class="auto-next-toggle" title="Pasar página automáticamente al terminar"><i data-lucide="skip-forward" width="18" height="18"></i><span>Auto-página</span><span id="autoNextStatus">OFF</span></button></div><div class="tts-sliders"><div class="slider-group"><label class="slider-label"><span>Velocidad</span><span class="slider-value" id="speedValue">1.0x</span></label><input type="range" class="slider" id="speedSlider" min="0.5" max="2" step="0.1" value="1"></div><div class="slider-group"><label class="slider-label"><span>Volumen</span><span class="slider-value" id="volumeValue">100%</span></label><input type="range" class="slider" id="volumeSlider" min="0" max="1" step="0.1" value="1"></div><div class="slider-group"><label class="slider-label"><span>Brillo</span><span class="slider-value" id="brightnessValue">100%</span></label><input type="range" class="slider" id="brightnessSlider" min="30" max="200" step="10" value="100"></div></div></div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
     
-    <!-- MODALS -->
-    <div class="modal-overlay" id="bookmarksModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">📖 Mis Marcadores</h3>
-                <button class="modal-close" id="closeBookmarksModal">
-                    <i data-lucide="x" width="20" height="20"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="bookmarks-list" id="bookmarksList"></div>
-                <div class="empty-state" id="emptyBookmarks" style="display: none;">
-                    <div class="empty-icon" style="width: 80px; height: 80px;">🔖</div>
-                    <h4 class="empty-title" style="font-size: 1.2rem;">No tienes marcadores</h4>
-                    <p class="empty-description">Agrega marcadores mientras lees</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal-overlay" id="settingsModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">⚙️ Configuración</h3>
-                <button class="modal-close" id="closeSettingsModal">
-                    <i data-lucide="x" width="20" height="20"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i data-lucide="palette" width="20" height="20"></i>
-                        Apariencia
-                    </h4>
-                    <div class="settings-grid">
-                        <div class="setting-item">
-                            <label class="setting-label" for="themeSettingSelect">Tema</label>
-                            <select class="voice-select" id="themeSettingSelect">
-                                <option value="light">☀️ Claro</option>
-                                <option value="dark">🌙 Oscuro</option>
-                                <option value="sepia">📄 Sepia</option>
-                                <option value="midnight">🌃 Medianoche</option>
-                                <option value="forest">🌲 Bosque</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i data-lucide="volume-2" width="20" height="20"></i>
-                        Audio y Lectura
-                    </h4>
-                    <div class="settings-grid">
-                        <div class="setting-item">
-                            <label class="setting-label" for="defaultVoiceSelect">Voz predeterminada</label>
-                            <select class="voice-select" id="defaultVoiceSelect">
-                                <option value="female">🗣️ Femenina</option>
-                                <option value="male">🗣️ Masculina</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
-                            <label class="setting-label">
-                                <input type="checkbox" id="autoNextSetting"> Pasar página automáticamente al terminar lectura
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="settings-section">
-                    <h4 class="settings-section-title">
-                        <i data-lucide="bar-chart" width="20" height="20"></i>
-                        Resumen
-                    </h4>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value" id="settingsStatTotal">0</div>
-                            <div class="stat-label">Libros Totales</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="settingsStatBookmarks">0</div>
-                            <div class="stat-label">Marcadores</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="modal-overlay" id="bookmarksModal"><div class="modal"><div class="modal-header"><h3 class="modal-title">📖 Mis Marcadores</h3><button class="modal-close" id="closeBookmarksModal"><i data-lucide="x" width="20" height="20"></i></button></div><div class="modal-body"><div class="bookmarks-list" id="bookmarksList"></div><div class="empty-state" id="emptyBookmarks" style="display: none;"><div class="empty-icon" style="width: 80px; height: 80px;">🔖</div><h4 class="empty-title" style="font-size: 1.2rem;">No tienes marcadores</h4><p class="empty-description">Agrega marcadores mientras lees</p></div></div></div></div>
+    <div class="modal-overlay" id="settingsModal"><div class="modal"><div class="modal-header"><h3 class="modal-title">⚙️ Configuración</h3><button class="modal-close" id="closeSettingsModal"><i data-lucide="x" width="20" height="20"></i></button></div><div class="modal-body"><div class="settings-section"><h4 class="settings-section-title"><i data-lucide="palette" width="20" height="20"></i> Apariencia</h4><div class="settings-grid"><div class="setting-item"><label class="setting-label" for="themeSettingSelect">Tema</label><select class="voice-select" id="themeSettingSelect"><option value="light">☀️ Claro</option><option value="dark">🌙 Oscuro</option><option value="sepia">📄 Sepia</option><option value="midnight">🌃 Medianoche</option><option value="forest">🌲 Bosque</option></select></div></div></div><div class="settings-section"><h4 class="settings-section-title"><i data-lucide="volume-2" width="20" height="20"></i> Audio y Lectura</h4><div class="settings-grid"><div class="setting-item"><label class="setting-label" for="defaultVoiceSelect">Voz predeterminada</label><select class="voice-select" id="defaultVoiceSelect"><option value="female">🗣️ Femenina</option><option value="male">🗣️ Masculina</option></select></div><div class="setting-item"><label class="setting-label"><input type="checkbox" id="autoNextSetting"> Pasar página automáticamente al terminar lectura</label></div></div></div><div class="settings-section"><h4 class="settings-section-title"><i data-lucide="bar-chart" width="20" height="20"></i> Resumen</h4><div class="stats-grid"><div class="stat-card"><div class="stat-value" id="settingsStatTotal">0</div><div class="stat-label">Libros Totales</div></div><div class="stat-card"><div class="stat-value" id="settingsStatBookmarks">0</div><div class="stat-label">Marcadores</div></div></div></div></div></div></div>
     
     <div class="toast-container" id="toastContainer"></div>
     
     <script>
+        // ==================== INDEXEDDB ====================
+        let db = null;
+        
+        function initIndexedDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open('ReadFlowDB', 1);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => {
+                    db = request.result;
+                    resolve(db);
+                };
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains('pdfs')) {
+                        const store = db.createObjectStore('pdfs', { keyPath: 'id' });
+                        store.createIndex('title', 'title', { unique: false });
+                    }
+                };
+            });
+        }
+        
+        async function savePDFToIndexedDB(id, pdfDataURL) {
+            const response = await fetch(pdfDataURL);
+            const blob = await response.blob();
+            const arrayBuffer = await blob.arrayBuffer();
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['pdfs'], 'readwrite');
+                const store = transaction.objectStore('pdfs');
+                const record = { id: id, pdfData: arrayBuffer };
+                const request = store.put(record);
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        async function getPDFFromIndexedDB(id) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['pdfs'], 'readonly');
+                const store = transaction.objectStore('pdfs');
+                const request = store.get(id);
+                request.onsuccess = () => {
+                    if (request.result) {
+                        const arrayBuffer = request.result.pdfData;
+                        const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+                        const url = URL.createObjectURL(blob);
+                        resolve(url);
+                    } else {
+                        resolve(null);
+                    }
+                };
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        async function deletePDFFromIndexedDB(id) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['pdfs'], 'readwrite');
+                const store = transaction.objectStore('pdfs');
+                const request = store.delete(id);
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
         // ==================== ESTADO GLOBAL ====================
         const AppState = {
             books: [],
@@ -1863,19 +1548,21 @@
             lastOpenedBook: null,
             ttsUtterance: null,
             autoNextPage: false,
-            // Nuevas variables para seguimiento de posición de lectura
-            currentPageText: '',       // Texto extraído de la página actual
-            currentCharOffset: 0       // Último índice de carácter conocido (onboundary)
+            currentPageText: '',
+            currentCharOffset: 0,
+            pendingPDFUrl: null
         };
         
         // ==================== INICIALIZACIÓN ====================
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initIndexedDB();
             initializeApp();
             setupEventListeners();
-            loadFromLocalStorage();
+            await loadFromLocalStorage();
             renderLibrary();
             updateStats();
             lucide.createIcons();
+            // NO se restaura automáticamente ninguna sesión de lectura
         });
         
         function initializeApp() {
@@ -1894,8 +1581,19 @@
             updateAutoNextUI();
         }
         
+        // ==================== PERSISTENCIA DE SESIÓN DE LECTURA (solo guardado) ====================
+        function saveReadingSession() {
+            if (!AppState.currentBook) return;
+            const session = {
+                bookId: AppState.currentBook.id,
+                page: AppState.currentPage,
+                charOffset: AppState.currentCharOffset
+            };
+            localStorage.setItem('readflow_lastSession', JSON.stringify(session));
+        }
+        
         // ==================== STORAGE ====================
-        function loadFromLocalStorage() {
+        async function loadFromLocalStorage() {
             const savedTheme = localStorage.getItem('readflow_theme');
             const savedBooks = localStorage.getItem('readflow_books');
             const savedBookmarks = localStorage.getItem('readflow_bookmarks');
@@ -1932,12 +1630,12 @@
             document.getElementById('brightnessValue').textContent = AppState.brightness + '%';
         }
         
-        function saveToLocalStorage() {
+        async function saveToLocalStorage() {
             localStorage.setItem('readflow_theme', AppState.currentTheme);
-            const booksToSave = AppState.books.map(book => ({
-                ...book,
-                pdfData: book.pdfData ? 'saved' : null
-            }));
+            const booksToSave = AppState.books.map(book => {
+                const { pdfData, ...metadata } = book;
+                return metadata;
+            });
             localStorage.setItem('readflow_books', JSON.stringify(booksToSave));
             localStorage.setItem('readflow_bookmarks', JSON.stringify(AppState.bookmarks));
             if (AppState.currentBook) {
@@ -1947,67 +1645,17 @@
             localStorage.setItem('readflow_volume', AppState.volume);
             localStorage.setItem('readflow_brightness', AppState.brightness);
             localStorage.setItem('readflow_autoNext', AppState.autoNextPage);
+            saveReadingSession();
         }
         
         // ==================== UI ====================
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth <= 768) {
-                sidebar.classList.toggle('active');
-            } else {
-                sidebar.classList.toggle('collapsed');
-                document.getElementById('mainContent').classList.toggle('expanded');
-            }
-        }
-        
-        function switchView(viewName) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.querySelector(`.nav-item[data-view="${viewName}"]`)?.classList.add('active');
-            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
-            document.getElementById(`${viewName}View`).classList.add('active');
-            if (viewName === 'stats') updateStats();
-            if (window.innerWidth <= 768) {
-                document.getElementById('sidebar').classList.remove('active');
-            }
-        }
-        
-        function changeTheme(theme) {
-            AppState.currentTheme = theme;
-            document.body.setAttribute('data-theme', theme);
-            updateActiveThemeButton();
-            saveToLocalStorage();
-            showToast('Tema cambiado ✨', 'success');
-            lucide.createIcons();
-        }
-        
-        function updateActiveThemeButton() {
-            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.theme-btn[data-theme="${AppState.currentTheme}"]`)?.classList.add('active');
-        }
-        
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-            if (modalId === 'bookmarksModal') renderBookmarks();
-            else if (modalId === 'settingsModal') updateSettingsModal();
-            lucide.createIcons();
-        }
-        
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-        
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icons = { success: '✅', error: '❌', info: 'ℹ️' };
-            toast.innerHTML = `<div class="toast-icon">${icons[type]}</div><div class="toast-content"><div class="toast-message">${message}</div></div>`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.animation = 'slideIn 0.3s ease reverse';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
+        function toggleSidebar() { const sidebar = document.getElementById('sidebar'); if (window.innerWidth <= 768) sidebar.classList.toggle('active'); else { sidebar.classList.toggle('collapsed'); document.getElementById('mainContent').classList.toggle('expanded'); } }
+        function switchView(viewName) { document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active')); document.querySelector(`.nav-item[data-view="${viewName}"]`)?.classList.add('active'); document.querySelectorAll('.view').forEach(view => view.classList.remove('active')); document.getElementById(`${viewName}View`).classList.add('active'); if (viewName === 'stats') updateStats(); if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('active'); }
+        function changeTheme(theme) { AppState.currentTheme = theme; document.body.setAttribute('data-theme', theme); updateActiveThemeButton(); saveToLocalStorage(); showToast('Tema cambiado ✨', 'success'); lucide.createIcons(); }
+        function updateActiveThemeButton() { document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active')); document.querySelector(`.theme-btn[data-theme="${AppState.currentTheme}"]`)?.classList.add('active'); }
+        function openModal(modalId) { document.getElementById(modalId).classList.add('active'); if (modalId === 'bookmarksModal') renderBookmarks(); else if (modalId === 'settingsModal') updateSettingsModal(); lucide.createIcons(); }
+        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        function showToast(message, type = 'info') { const container = document.getElementById('toastContainer'); const toast = document.createElement('div'); toast.className = `toast ${type}`; const icons = { success: '✅', error: '❌', info: 'ℹ️' }; toast.innerHTML = `<div class="toast-icon">${icons[type]}</div><div class="toast-content"><div class="toast-message">${message}</div></div>`; container.appendChild(toast); setTimeout(() => { toast.style.animation = 'slideIn 0.3s ease reverse'; setTimeout(() => toast.remove(), 300); }, 3000); }
         
         // ==================== LIBRERÍA ====================
         async function handleFileUpload(e) {
@@ -2019,7 +1667,8 @@
             const reader = new FileReader();
             reader.onload = async (event) => {
                 showToast('📖 Procesando PDF...', 'info');
-                let coverImage = await extractBookCover(event.target.result);
+                const pdfDataURL = event.target.result;
+                let coverImage = await extractBookCover(pdfDataURL);
                 const newBook = {
                     id: Date.now(),
                     title: file.name.replace('.pdf', ''),
@@ -2030,12 +1679,12 @@
                     status: 'unread',
                     dateAdded: new Date().toISOString(),
                     lastRead: new Date().toISOString(),
-                    pdfData: event.target.result,
                     cover: coverImage || '📚',
                     size: (file.size / 1024 / 1024).toFixed(2) + ' MB'
                 };
+                await savePDFToIndexedDB(newBook.id, pdfDataURL);
                 AppState.books.push(newBook);
-                saveToLocalStorage();
+                await saveToLocalStorage();
                 renderLibrary();
                 updateStats();
                 showToast('✅ Libro agregado', 'success');
@@ -2044,9 +1693,9 @@
             e.target.value = '';
         }
         
-        async function extractBookCover(pdfData) {
+        async function extractBookCover(pdfDataURL) {
             try {
-                const pdf = await pdfjsLib.getDocument(pdfData).promise;
+                const pdf = await pdfjsLib.getDocument(pdfDataURL).promise;
                 const page = await pdf.getPage(1);
                 const viewport = page.getViewport({ scale: 1.2 });
                 const canvas = document.createElement('canvas');
@@ -2099,11 +1748,12 @@
         function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
         function getStatusText(status) { const t={reading:'📖 Leyendo',completed:'✅ Completado',unread:'🆕 Nuevo'}; return t[status]||'Nuevo'; }
         
-        function deleteBook(bookId) {
+        async function deleteBook(bookId) {
             if (confirm('¿Eliminar este libro? No se puede deshacer.')) {
                 AppState.books = AppState.books.filter(b => b.id !== bookId);
                 AppState.bookmarks = AppState.bookmarks.filter(b => b.bookId !== bookId);
-                saveToLocalStorage();
+                await deletePDFFromIndexedDB(bookId);
+                await saveToLocalStorage();
                 renderLibrary();
                 updateStats();
                 document.getElementById('bookmarksCount').textContent = AppState.bookmarks.length;
@@ -2111,30 +1761,52 @@
             }
         }
         
-        function openBook(bookId) {
+        async function openBook(bookId, targetPage = null, targetOffset = null) {
             const book = AppState.books.find(b => b.id === bookId);
             if (!book) return;
+            // Si no se especifican targetPage/targetOffset, intentar recuperar la última sesión guardada para este libro
+            let finalPage = targetPage;
+            let finalOffset = targetOffset;
+            if (finalPage === null) {
+                const sessionRaw = localStorage.getItem('readflow_lastSession');
+                if (sessionRaw) {
+                    try {
+                        const session = JSON.parse(sessionRaw);
+                        if (session.bookId === bookId) {
+                            finalPage = session.page;
+                            finalOffset = session.charOffset;
+                        }
+                    } catch(e) {}
+                }
+                if (finalPage === null) finalPage = book.currentPage || 1;
+                if (finalOffset === null) finalOffset = 0;
+            }
+            
+            const pdfUrl = await getPDFFromIndexedDB(bookId);
+            if (!pdfUrl) {
+                showToast('Error: no se encontró el archivo PDF', 'error');
+                return;
+            }
             AppState.currentBook = book;
-            AppState.currentPage = book.currentPage || 1;
+            AppState.currentPage = finalPage;
             AppState.pageCache.clear();
-            // Reiniciar estado de lectura al abrir un libro
-            stopTTS();
+            if (AppState.isReading) stopTTS(false);
             AppState.currentPageText = '';
-            AppState.currentCharOffset = 0;
+            AppState.currentCharOffset = finalOffset;
             book.lastRead = new Date().toISOString();
             if (book.status === 'unread') book.status = 'reading';
-            saveToLocalStorage();
+            await saveToLocalStorage();
             switchView('reader');
             document.getElementById('readerTitle').textContent = book.title;
-            loadPDF(book.pdfData);
+            await loadPDF(pdfUrl, finalPage);
             if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('active');
             showToast('📖 Abriendo: ' + book.title, 'info');
         }
         
         // ==================== PDF Y RENDER ====================
-        async function loadPDF(pdfData) {
+        async function loadPDF(pdfUrl, initialPage = 1) {
             try {
-                const loadingTask = pdfjsLib.getDocument(pdfData);
+                const loadingTask = pdfjsLib.getDocument(pdfUrl);
                 AppState.pdfDoc = await loadingTask.promise;
                 AppState.numPages = AppState.pdfDoc.numPages;
                 document.getElementById('totalPagesDisplay').textContent = AppState.numPages;
@@ -2142,11 +1814,12 @@
                 document.getElementById('pageInput').setAttribute('max', AppState.numPages);
                 if (AppState.currentBook) {
                     AppState.currentBook.pages = AppState.numPages;
-                    saveToLocalStorage();
+                    await saveToLocalStorage();
                 }
-                await renderPage(AppState.currentPage);
+                await renderPage(initialPage);
                 showToast(`📄 ${AppState.numPages} páginas cargadas`, 'success');
-            } catch(e) { showToast('❌ Error al cargar PDF', 'error'); }
+                URL.revokeObjectURL(pdfUrl);
+            } catch(e) { showToast('❌ Error al cargar PDF', 'error'); console.error(e); }
         }
         
         async function renderPage(pageNum) {
@@ -2163,18 +1836,17 @@
                 document.getElementById('currentPageDisplay').textContent = pageNum;
                 document.getElementById('pageInput').value = pageNum;
                 
-                // Extraer texto de la página para TTS y guardarlo
                 const textContent = await page.getTextContent();
                 AppState.currentPageText = textContent.items.map(item => item.str).join(' ');
-                // Al cambiar de página, reiniciamos el offset porque el texto es nuevo
-                AppState.currentCharOffset = 0;
+                if (AppState.currentCharOffset > AppState.currentPageText.length) AppState.currentCharOffset = 0;
+                saveReadingSession();
                 
                 if (AppState.currentBook) {
                     AppState.currentBook.currentPage = pageNum;
                     const newProgress = Math.round((pageNum / AppState.numPages) * 100);
                     AppState.currentBook.progress = newProgress;
                     if (newProgress === 100) AppState.currentBook.status = 'completed';
-                    saveToLocalStorage();
+                    await saveToLocalStorage();
                 }
                 updateNavigationButtons();
                 document.getElementById('readerContent').style.filter = `brightness(${AppState.brightness}%)`;
@@ -2188,7 +1860,8 @@
         
         function goToPage(pageNum) {
             if (pageNum >= 1 && pageNum <= AppState.numPages) {
-                if (AppState.isReading) stopTTS();
+                if (AppState.isReading) stopTTS(false);
+                AppState.currentCharOffset = 0;
                 renderPage(pageNum);
             }
         }
@@ -2198,252 +1871,53 @@
             document.getElementById('nextPageBtn').disabled = AppState.currentPage >= AppState.numPages;
         }
         
-        // ==================== TTS CON REANUDACIÓN EXACTA ====================
+        // ==================== TTS ROBUSTO ====================
+        async function ensurePageText() { if (AppState.currentPageText && AppState.currentPageText.trim().length > 0) return true; if (AppState.pdfDoc && AppState.currentPage) { try { const page = await AppState.pdfDoc.getPage(AppState.currentPage); const textContent = await page.getTextContent(); AppState.currentPageText = textContent.items.map(item => item.str).join(' '); return AppState.currentPageText.trim().length > 0; } catch(e) { return false; } } return false; }
+        
         async function toggleTTS() {
-            if (AppState.isReading) {
-                stopTTS(true); // true = preservar offset (pausa manual)
-            } else {
-                // Si no hay texto en la página actual, extraerlo
-                if (!AppState.currentPageText && AppState.pdfDoc) {
-                    const page = await AppState.pdfDoc.getPage(AppState.currentPage);
-                    const textContent = await page.getTextContent();
-                    AppState.currentPageText = textContent.items.map(item => item.str).join(' ');
-                }
-                if (!AppState.currentPageText.trim()) {
-                    showToast('⚠️ Sin texto en esta página', 'error');
-                    return;
-                }
-                startReading();
-            }
+            if (AppState.isReading) { stopTTS(true); showToast('🔊 Lectura pausada', 'info'); } else { const hasText = await ensurePageText(); if (!hasText) { showToast('⚠️ No se pudo extraer texto de esta página', 'error'); return; } startReading(); }
         }
         
-        function stopTTS(preserveOffset = false) {
-            if (AppState.ttsUtterance) {
-                speechSynthesis.cancel();
-                AppState.ttsUtterance = null;
-            }
-            if (!preserveOffset) {
-                // Si no se pide preservar (cambio de página, cierre, etc.), reiniciamos offset
-                AppState.currentCharOffset = 0;
-            }
-            AppState.isReading = false;
-            updateTTSButton();
-        }
+        function stopTTS(preserveOffset = false) { if (AppState.ttsUtterance) { speechSynthesis.cancel(); AppState.ttsUtterance = null; } if (!preserveOffset) AppState.currentCharOffset = 0; AppState.isReading = false; updateTTSButton(); saveReadingSession(); }
         
         function startReading() {
-            // Detener cualquier síntesis anterior
-            if (AppState.ttsUtterance) {
-                speechSynthesis.cancel();
-                AppState.ttsUtterance = null;
-            }
-            
-            // Obtener texto a leer: desde offset hasta el final
-            let textToRead = AppState.currentPageText;
+            if (AppState.ttsUtterance) { speechSynthesis.cancel(); AppState.ttsUtterance = null; }
+            let fullText = AppState.currentPageText;
             let startOffset = AppState.currentCharOffset;
-            if (startOffset > 0 && startOffset < textToRead.length) {
-                textToRead = textToRead.substring(startOffset);
-                // Recortar para evitar empezar en medio de una palabra (opcional: buscar primer espacio)
-                // pero no es estrictamente necesario.
-            } else if (startOffset >= textToRead.length) {
-                // Ya se leyó toda la página, reiniciar (por si acaso)
-                AppState.currentCharOffset = 0;
-                textToRead = AppState.currentPageText;
-            }
-            
-            if (!textToRead.trim()) {
-                showToast('No hay texto para leer', 'error');
-                return;
-            }
-            
+            if (startOffset >= fullText.length) { startOffset = 0; AppState.currentCharOffset = 0; }
+            let textToRead = fullText.substring(startOffset);
+            if (!textToRead.trim()) { showToast('No hay texto desde la posición guardada', 'error'); return; }
             AppState.ttsUtterance = new SpeechSynthesisUtterance(textToRead);
-            
-            // Configurar voz
             let voices = AppState.availableVoices.filter(v => v.lang.includes('es'));
             if (voices.length === 0) voices = AppState.availableVoices;
             const selectedVoiceType = document.getElementById('voiceSelect').value;
-            if (voices.length) {
-                let found = voices.find(v => selectedVoiceType === 'female' ? (v.name.toLowerCase().includes('female') || v.name.includes('Mónica')) : (v.name.toLowerCase().includes('male') || v.name.includes('Jorge')));
-                if (found) AppState.ttsUtterance.voice = found;
-                else AppState.ttsUtterance.voice = voices[0];
-            }
+            if (voices.length) { let found = voices.find(v => selectedVoiceType === 'female' ? (v.name.toLowerCase().includes('female') || v.name.includes('Mónica')) : (v.name.toLowerCase().includes('male') || v.name.includes('Jorge'))); if (found) AppState.ttsUtterance.voice = found; else AppState.ttsUtterance.voice = voices[0]; }
             AppState.ttsUtterance.rate = AppState.readingSpeed;
             AppState.ttsUtterance.volume = AppState.volume;
             AppState.ttsUtterance.lang = 'es-ES';
-            
-            // Evento `onboundary` para actualizar el offset según avanza la lectura
-            AppState.ttsUtterance.onboundary = (event) => {
-                // event.charIndex es la posición dentro del texto actual (textToRead, que ya es substring)
-                // Pero necesitamos la posición absoluta dentro de AppState.currentPageText
-                if (event.name === 'word' || event.name === 'sentence') {
-                    let absoluteOffset = startOffset + event.charIndex;
-                    if (absoluteOffset >= 0 && absoluteOffset <= AppState.currentPageText.length) {
-                        AppState.currentCharOffset = absoluteOffset;
-                    }
-                }
-            };
-            
-            AppState.ttsUtterance.onend = () => {
-                AppState.isReading = false;
-                updateTTSButton();
-                // Cuando termina la lectura, si llegó al final de la página, el offset queda al final
-                if (AppState.currentCharOffset >= AppState.currentPageText.length - 1) {
-                    // Opcional: marcar offset como final, pero podemos reiniciar offset cuando se cambie de página
-                    AppState.currentCharOffset = 0; // reiniciar para la próxima vez que se lea la misma página (aunque no debería)
-                }
-                if (AppState.autoNextPage && AppState.currentPage < AppState.numPages) {
-                    showToast('🔁 Pasando a siguiente página...', 'info');
-                    goToPage(AppState.currentPage + 1);
-                    // Reanudar automáticamente la lectura en la nueva página
-                    setTimeout(() => { 
-                        if (AppState.autoNextPage && !AppState.isReading) {
-                            toggleTTS(); 
-                        } 
-                    }, 1000);
-                }
-            };
-            
-            AppState.ttsUtterance.onerror = (e) => {
-                console.error('TTS error', e);
-                AppState.isReading = false;
-                updateTTSButton();
-            };
-            
+            AppState.ttsUtterance.onboundary = (event) => { if (event.name === 'word' || event.name === 'sentence') { let absoluteOffset = startOffset + event.charIndex; if (absoluteOffset >= 0 && absoluteOffset <= fullText.length) { AppState.currentCharOffset = absoluteOffset; saveReadingSession(); } } };
+            AppState.ttsUtterance.onend = () => { AppState.isReading = false; updateTTSButton(); if (AppState.currentCharOffset >= fullText.length - 1) { AppState.currentCharOffset = 0; saveReadingSession(); } if (AppState.autoNextPage && AppState.currentPage < AppState.numPages) { showToast('🔁 Pasando a siguiente página...', 'info'); goToPage(AppState.currentPage + 1); setTimeout(() => { if (AppState.autoNextPage && !AppState.isReading && AppState.currentPageText) toggleTTS(); }, 500); } };
+            AppState.ttsUtterance.onerror = (e) => { console.error('TTS error', e); AppState.isReading = false; updateTTSButton(); showToast('Error en la síntesis de voz', 'error'); };
             speechSynthesis.speak(AppState.ttsUtterance);
             AppState.isReading = true;
             updateTTSButton();
-            showToast('🔊 Leyendo en voz alta (desde donde quedó)', 'info');
+            let percent = Math.round((startOffset / fullText.length) * 100);
+            showToast(`🔊 Leyendo desde ${percent}% de la página`, 'info');
         }
         
-        function updateTTSButton() {
-            const icon = document.getElementById('ttsIcon');
-            const textBtn = document.getElementById('ttsText');
-            if (AppState.isReading) {
-                icon.setAttribute('data-lucide', 'pause');
-                textBtn.textContent = 'Pausar';
-            } else {
-                icon.setAttribute('data-lucide', 'play');
-                textBtn.textContent = 'Leer en Voz Alta';
-            }
-            lucide.createIcons();
-        }
-        
-        function updateAutoNextUI() {
-            const btn = document.getElementById('autoNextToggle');
-            const statusSpan = document.getElementById('autoNextStatus');
-            if (AppState.autoNextPage) {
-                btn.classList.add('active');
-                statusSpan.textContent = 'ON';
-            } else {
-                btn.classList.remove('active');
-                statusSpan.textContent = 'OFF';
-            }
-            if (document.getElementById('autoNextSetting')) {
-                document.getElementById('autoNextSetting').checked = AppState.autoNextPage;
-            }
-        }
-        
-        function toggleAutoNext() {
-            AppState.autoNextPage = !AppState.autoNextPage;
-            saveToLocalStorage();
-            updateAutoNextUI();
-            showToast(`Auto-página ${AppState.autoNextPage ? 'activado' : 'desactivado'}`, 'info');
-        }
+        function updateTTSButton() { const icon = document.getElementById('ttsIcon'); const textBtn = document.getElementById('ttsText'); if (AppState.isReading) { icon.setAttribute('data-lucide', 'pause'); textBtn.textContent = 'Pausar'; } else { icon.setAttribute('data-lucide', 'play'); textBtn.textContent = 'Leer en Voz Alta'; } lucide.createIcons(); }
+        function updateAutoNextUI() { const btn = document.getElementById('autoNextToggle'); const statusSpan = document.getElementById('autoNextStatus'); if (AppState.autoNextPage) { btn.classList.add('active'); statusSpan.textContent = 'ON'; } else { btn.classList.remove('active'); statusSpan.textContent = 'OFF'; } if (document.getElementById('autoNextSetting')) document.getElementById('autoNextSetting').checked = AppState.autoNextPage; }
+        function toggleAutoNext() { AppState.autoNextPage = !AppState.autoNextPage; saveToLocalStorage(); updateAutoNextUI(); showToast(`Auto-página ${AppState.autoNextPage ? 'activado' : 'desactivado'}`, 'info'); }
         
         // ==================== MARCADORES ====================
-        function addBookmark() {
-            if (!AppState.currentBook) return;
-            if (AppState.bookmarks.some(b => b.bookId === AppState.currentBook.id && b.page === AppState.currentPage)) {
-                showToast('⚠️ Ya existe marcador en esta página', 'error');
-                return;
-            }
-            AppState.bookmarks.push({
-                id: Date.now(),
-                bookId: AppState.currentBook.id,
-                bookTitle: AppState.currentBook.title,
-                page: AppState.currentPage,
-                date: new Date().toISOString()
-            });
-            saveToLocalStorage();
-            document.getElementById('bookmarksCount').textContent = AppState.bookmarks.length;
-            showToast('🔖 Marcador agregado', 'success');
-            const btn = document.getElementById('addBookmarkBtn');
-            btn.classList.add('active');
-            setTimeout(() => btn.classList.remove('active'), 800);
-        }
-        
-        function renderBookmarks() {
-            const list = document.getElementById('bookmarksList');
-            const empty = document.getElementById('emptyBookmarks');
-            if (AppState.bookmarks.length === 0) {
-                list.style.display = 'none';
-                empty.style.display = 'block';
-            } else {
-                list.style.display = 'flex';
-                empty.style.display = 'none';
-                list.innerHTML = AppState.bookmarks.map(b => `
-                    <div class="bookmark-item" onclick="goToBookmark(${b.id})">
-                        <div class="bookmark-info">
-                            <div class="bookmark-title">${escapeHtml(b.bookTitle)}</div>
-                            <div class="bookmark-meta">Página ${b.page} • ${new Date(b.date).toLocaleDateString('es-ES')}</div>
-                        </div>
-                        <div class="bookmark-actions">
-                            <button class="icon-btn" onclick="event.stopPropagation(); deleteBookmark(${b.id})" title="Eliminar"><i data-lucide="trash-2" width="16" height="16"></i></button>
-                        </div>
-                    </div>
-                `).join('');
-                lucide.createIcons();
-            }
-        }
-        
-        function goToBookmark(bookmarkId) {
-            const b = AppState.bookmarks.find(b => b.id === bookmarkId);
-            if (!b) return;
-            const book = AppState.books.find(bk => bk.id === b.bookId);
-            if (book) { openBook(book.id); setTimeout(() => goToPage(b.page), 400); }
-            closeModal('bookmarksModal');
-        }
-        
-        function deleteBookmark(bookmarkId) {
-            AppState.bookmarks = AppState.bookmarks.filter(b => b.id !== bookmarkId);
-            saveToLocalStorage();
-            renderBookmarks();
-            document.getElementById('bookmarksCount').textContent = AppState.bookmarks.length;
-            showToast('🗑️ Marcador eliminado', 'success');
-        }
+        function addBookmark() { if (!AppState.currentBook) return; if (AppState.bookmarks.some(b => b.bookId === AppState.currentBook.id && b.page === AppState.currentPage)) { showToast('⚠️ Ya existe marcador en esta página', 'error'); return; } AppState.bookmarks.push({ id: Date.now(), bookId: AppState.currentBook.id, bookTitle: AppState.currentBook.title, page: AppState.currentPage, date: new Date().toISOString() }); saveToLocalStorage(); document.getElementById('bookmarksCount').textContent = AppState.bookmarks.length; showToast('🔖 Marcador agregado', 'success'); const btn = document.getElementById('addBookmarkBtn'); btn.classList.add('active'); setTimeout(() => btn.classList.remove('active'), 800); }
+        function renderBookmarks() { const list = document.getElementById('bookmarksList'); const empty = document.getElementById('emptyBookmarks'); if (AppState.bookmarks.length === 0) { list.style.display = 'none'; empty.style.display = 'block'; } else { list.style.display = 'flex'; empty.style.display = 'none'; list.innerHTML = AppState.bookmarks.map(b => `<div class="bookmark-item" onclick="goToBookmark(${b.id})"><div class="bookmark-info"><div class="bookmark-title">${escapeHtml(b.bookTitle)}</div><div class="bookmark-meta">Página ${b.page} • ${new Date(b.date).toLocaleDateString('es-ES')}</div></div><div class="bookmark-actions"><button class="icon-btn" onclick="event.stopPropagation(); deleteBookmark(${b.id})" title="Eliminar"><i data-lucide="trash-2" width="16" height="16"></i></button></div></div>`).join(''); lucide.createIcons(); } }
+        async function goToBookmark(bookmarkId) { const b = AppState.bookmarks.find(b => b.id === bookmarkId); if (!b) return; const book = AppState.books.find(bk => bk.id === b.bookId); if (book) { await openBook(book.id, b.page, 0); } closeModal('bookmarksModal'); }
+        function deleteBookmark(bookmarkId) { AppState.bookmarks = AppState.bookmarks.filter(b => b.id !== bookmarkId); saveToLocalStorage(); renderBookmarks(); document.getElementById('bookmarksCount').textContent = AppState.bookmarks.length; showToast('🗑️ Marcador eliminado', 'success'); }
         
         // ==================== ESTADÍSTICAS ====================
-        function updateStats() {
-            const total = AppState.books.length;
-            const reading = AppState.books.filter(b => b.status === 'reading').length;
-            const completed = AppState.books.filter(b => b.status === 'completed').length;
-            const avgProgress = total ? Math.round(AppState.books.reduce((s,b)=>s+b.progress,0)/total) : 0;
-            document.getElementById('statTotal').textContent = total;
-            document.getElementById('statReading').textContent = reading;
-            document.getElementById('statCompleted').textContent = completed;
-            document.getElementById('statProgress').textContent = avgProgress + '%';
-            const activityList = document.getElementById('activityList');
-            const recent = [...AppState.books].sort((a,b)=>new Date(b.lastRead)-new Date(a.lastRead)).slice(0,5);
-            if (!recent.length) activityList.innerHTML = '<div class="empty-state"><p>No hay actividad reciente</p></div>';
-            else {
-                activityList.innerHTML = recent.map(book => `
-                    <div class="activity-item" onclick="openBook(${book.id})">
-                        <div class="activity-icon">${book.cover && book.cover.startsWith('data:image') ? `<img src="${book.cover}" alt="">` : book.cover}</div>
-                        <div class="activity-content"><div class="activity-title">${escapeHtml(book.title)}</div><div class="activity-date">${new Date(book.lastRead).toLocaleDateString('es-ES')}</div></div>
-                        <div class="activity-progress">${book.progress}%</div>
-                    </div>
-                `).join('');
-            }
-            lucide.createIcons();
-        }
-        
-        function updateSettingsModal() {
-            document.getElementById('settingsStatTotal').textContent = AppState.books.length;
-            document.getElementById('settingsStatBookmarks').textContent = AppState.bookmarks.length;
-            document.getElementById('themeSettingSelect').value = AppState.currentTheme;
-            document.getElementById('defaultVoiceSelect').value = document.getElementById('voiceSelect').value;
-            document.getElementById('autoNextSetting').checked = AppState.autoNextPage;
-            lucide.createIcons();
-        }
+        function updateStats() { const total = AppState.books.length; const reading = AppState.books.filter(b => b.status === 'reading').length; const completed = AppState.books.filter(b => b.status === 'completed').length; const avgProgress = total ? Math.round(AppState.books.reduce((s,b)=>s+b.progress,0)/total) : 0; document.getElementById('statTotal').textContent = total; document.getElementById('statReading').textContent = reading; document.getElementById('statCompleted').textContent = completed; document.getElementById('statProgress').textContent = avgProgress + '%'; const activityList = document.getElementById('activityList'); const recent = [...AppState.books].sort((a,b)=>new Date(b.lastRead)-new Date(a.lastRead)).slice(0,5); if (!recent.length) activityList.innerHTML = '<div class="empty-state"><p>No hay actividad reciente</p></div>'; else { activityList.innerHTML = recent.map(book => `<div class="activity-item" onclick="openBook(${book.id})"><div class="activity-icon">${book.cover && book.cover.startsWith('data:image') ? `<img src="${book.cover}" alt="">` : book.cover}</div><div class="activity-content"><div class="activity-title">${escapeHtml(book.title)}</div><div class="activity-date">${new Date(book.lastRead).toLocaleDateString('es-ES')}</div></div><div class="activity-progress">${book.progress}%</div></div>`).join(''); } lucide.createIcons(); }
+        function updateSettingsModal() { document.getElementById('settingsStatTotal').textContent = AppState.books.length; document.getElementById('settingsStatBookmarks').textContent = AppState.bookmarks.length; document.getElementById('themeSettingSelect').value = AppState.currentTheme; document.getElementById('defaultVoiceSelect').value = document.getElementById('voiceSelect').value; document.getElementById('autoNextSetting').checked = AppState.autoNextPage; lucide.createIcons(); }
         
         // ==================== EVENT LISTENERS ====================
         function setupEventListeners() {
@@ -2470,17 +1944,12 @@
             document.getElementById('settingsBtn').addEventListener('click', () => openModal('settingsModal'));
             document.getElementById('closeBookmarksModal').addEventListener('click', () => closeModal('bookmarksModal'));
             document.getElementById('closeSettingsModal').addEventListener('click', () => closeModal('settingsModal'));
-            document.getElementById('focusModeBtn').addEventListener('click', () => {
-                AppState.focusMode = !AppState.focusMode;
-                const controls = document.getElementById('readerControls');
-                if (AppState.focusMode) controls.style.display = 'none';
-                else controls.style.display = 'block';
-                document.getElementById('focusModeBtn').classList.toggle('active', AppState.focusMode);
-            });
+            document.getElementById('focusModeBtn').addEventListener('click', () => { AppState.focusMode = !AppState.focusMode; const controls = document.getElementById('readerControls'); if (AppState.focusMode) controls.style.display = 'none'; else controls.style.display = 'block'; document.getElementById('focusModeBtn').classList.toggle('active', AppState.focusMode); });
             document.querySelectorAll('.modal-overlay').forEach(overlay => overlay.addEventListener('click', (e) => { if(e.target===overlay) closeModal(overlay.id); }));
             document.getElementById('themeSettingSelect').addEventListener('change', (e) => changeTheme(e.target.value));
             document.getElementById('defaultVoiceSelect').addEventListener('change', (e) => document.getElementById('voiceSelect').value = e.target.value);
             document.getElementById('autoNextSetting').addEventListener('change', (e) => { AppState.autoNextPage = e.target.checked; saveToLocalStorage(); updateAutoNextUI(); });
+            window.addEventListener('beforeunload', () => { if (AppState.isReading) stopTTS(true); saveReadingSession(); });
         }
     </script>
 </body>
